@@ -1,0 +1,154 @@
+<?xml version="1.0"?>
+<robot name="phantom" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <material name="orange">
+        <color rgba="1 0.5 0 1"/>
+    </material>
+
+    <link name="base_link">
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry>
+                <box size="0 0 0"/>
+            </geometry>
+            <material name="orange"/>
+        </visual>
+    </link>
+
+    <joint name="base_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="robot_base"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+    
+    
+
+    <link name="robot_base">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://ProyectoInt/meshes/PincherBase.dae" scale="10.0 10.0 10.0" />
+            </geometry>
+        </visual>
+    </link>
+
+
+    <joint name="joint1" type="revolute">
+        <parent link="robot_base"/>
+        <child link="link1"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-3.14159" upper="3.14159" velocity="50" effort="1000"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+    
+    
+    
+    <link name="link1">
+        <visual>
+            <origin xyz="0 0 0.95" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://ProyectoInt/meshes/PincherLink1.dae" scale="10.0 10.0 10.0" />
+            </geometry>
+        </visual>
+    </link>
+
+
+    <joint name="joint2" type="revolute">
+        <parent link="link1"/>
+        <child link="link2"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-3.14159" upper="3.14159" velocity="50" effort="1000"/>
+        <origin xyz="0 0 1.37" rpy="-1.57 0 0"/>
+    </joint>
+    
+    
+    
+    <link name="link2">
+        <visual>
+            <origin xyz="0 0 0" rpy="1.57 0 1.57"/>
+            <geometry>
+                <mesh filename="package://ProyectoInt/meshes/PincherLink2.dae" scale="10.0 10.0 10.0" />
+            </geometry>
+        </visual>
+    </link>
+    
+    <joint name="joint3" type="revolute">
+        <parent link="link2"/>
+        <child link="link3"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-3.14159" upper="3.14159" velocity="50" effort="1000"/>
+        <origin xyz="1.05 0 0" rpy="0 0 0"/>
+    </joint>
+    
+    
+    
+    <link name="link3">
+        <visual>
+            <origin xyz="0 0 0" rpy="1.57 0 1.57"/>
+            <geometry>
+                <mesh filename="package://ProyectoInt/meshes/PincherLink3.dae" scale="10.0 10.0 10.0" />
+            </geometry>
+        </visual>
+    </link>
+
+    <joint name="joint4" type="revolute">
+        <parent link="link3"/>
+        <child link="link4"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-3.14159" upper="3.14159" velocity="50" effort="1000"/>
+        <origin xyz="1.05 0 0" rpy="0 0 0"/>
+    </joint>
+    
+    
+    
+    <link name="link4">
+        <visual>
+            <origin xyz="0 0 0" rpy="1.57 0 1.57 "/>
+            <geometry>
+                <mesh filename="package://ProyectoInt/meshes/PincherTool.dae" scale="10.0 10.0 10.0" />
+            </geometry>
+            
+        </visual>
+    </link>
+
+  <joint name="joint5" type="prismatic">
+      <parent link="link4"/>
+      <child link="link5"/>
+      <axis xyz="0 0 1"/>
+      <limit lower="0" upper="0.16" velocity="0.5" effort="1000.0"/>
+      <origin xyz="0.71 0 -0.3" rpy="0 0 0"/>
+  </joint>
+
+  <link name="link5">
+        <visual>
+            <origin xyz="0 0 0" rpy="1.57 0 1.57 "/>
+            <geometry>
+                <mesh filename="package://ProyectoInt/meshes/PincheFinger.dae" scale="10.0 10.0 10.0" />
+            </geometry>
+            
+        </visual>
+    </link>
+
+    <joint name="joint6" type="prismatic">
+      <parent link="link4"/>
+      <child link="link6"/>
+      <axis xyz="0 0 1"/>
+      <limit lower="0" upper="0.16" velocity="0.5" effort="1000.0"/>
+      <origin xyz="0.71 0 0.3" rpy="3.14 0 0"/>
+      <mimic joint="joint5" m_multiplier="1" m_offset="0" />
+  </joint>
+  
+  <link name="link6">
+        <visual>
+            <origin xyz="0 0 0" rpy="1.57 0 1.57 "/>
+            <geometry>
+                <mesh filename="package://ProyectoInt/meshes/PincheFinger.dae" scale="10.0 10.0 10.0" />
+            </geometry>
+            
+        </visual>
+    </link>
+
+
+
+</robot>
+
